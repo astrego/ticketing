@@ -1,0 +1,60 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*
+build:
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: kubernetes-course-279208
+  artifacts:
+    - image: us.gcr.io/kubernetes-course-279208/auth
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: us.gcr.io/kubernetes-course-279208/client
+      context: client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*.js'
+            dest: .
+    - image: us.gcr.io/kubernetes-course-279208/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: us.gcr.io/kubernetes-course-279208/orders
+      context: orders
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: us.gcr.io/kubernetes-course-279208/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: us.gcr.io/kubernetes-course-279208/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
