@@ -2,7 +2,9 @@ name: tests-tickets
 
 on:
   pull_request:
-    
+    paths:
+      - 'tichets/**'
+
 jobs:
   build:
     runs-on: ubuntu-latest
